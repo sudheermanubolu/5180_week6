@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Install Docker') {
             steps{
-                sh 'echo "all build steps here'
+                sh 'echo "all build steps here"'
             }
         }
         stage('Download Kubectl') {
