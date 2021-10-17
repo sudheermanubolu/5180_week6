@@ -22,7 +22,6 @@ pipeline {
         stage('start load test') {
             steps{
                 sh "chmod +x start_test.sh"
-                sh "echo pwd"
                 sh "./start_test.sh Jenkins_test.jmx"
             }
         }
