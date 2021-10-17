@@ -5,9 +5,6 @@
 
 working_dir="`pwd`"
 
-#Get namesapce variable
-tenant=`awk '{print $NF}' "$working_dir/tenant_export"`
-
 jmx="$1"
 [ -n "$jmx" ] || read -p 'Enter path to the jmx file ' jmx
 
@@ -23,10 +20,10 @@ test_name="$(basename "$jmx")"
 
 #Get Master pod details
 
-master_pod=`./kubectl get po -n $tenant | grep jmeter-master | awk '{print $1}'`
+master_pod=`./kubectl get po -n jmeter | grep jmeter-master | awk '{print $1}'`
 
-./kubectl cp "$jmx" -n $tenant "$master_pod:/$test_name"
+./kubectl cp "$jmx" -n jmeter "$master_pod:/$test_name"
 
 ## Echo Starting Jmeter load test
 
-./kubectl exec -ti -n $tenant $master_pod -- /bin/bash /load_test "$test_name"
+./kubectl exec -ti -n jmeter $master_pod -- /bin/bash /load_test "$test_name"
